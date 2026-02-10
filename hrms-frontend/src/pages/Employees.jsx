@@ -3,21 +3,19 @@ import { api, normalizeError } from "../lib/api";
 
 export default function Employees() {
   const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [err, setErr] = useState("");
 
   const [form, setForm] = useState({ employee_id: "", full_name: "", email: "", department: "" });
   const [saving, setSaving] = useState(false);
 
   async function load() {
-    setLoading(true); setErr("");
+    setErr("");
     try {
       const res = await api.get("/api/employees/");
       setItems(res.data);
     } catch (e) {
       setErr(normalizeError(e));
-    } finally {
-      setLoading(false);
+      setItems([]); // safe fallback
     }
   }
 
@@ -25,7 +23,8 @@ export default function Employees() {
 
   async function addEmployee(e) {
     e.preventDefault();
-    setSaving(true); setErr("");
+    setSaving(true);
+    setErr("");
     try {
       await api.post("/api/employees/", form);
       setForm({ employee_id: "", full_name: "", email: "", department: "" });
@@ -70,11 +69,12 @@ export default function Employees() {
               />
             </div>
           ))}
+
           <button
             disabled={saving}
-            className="mt-2 rounded-lg bg-slate-900 text-white px-3 py-2 text-sm disabled:opacity-60"
+            className="mt-2 rounded-lg bg-slate-900 text-white px-3 py-2 text-sm disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            {saving ? "Saving..." : "Add Employee"}
+            Add Employee
           </button>
         </form>
       </section>
@@ -83,12 +83,9 @@ export default function Employees() {
         <h2 className="font-semibold">Employees</h2>
         <p className="text-sm text-slate-500 mb-4">Manage employee list.</p>
 
-        {loading && <div className="text-sm text-slate-500">Loading employees…</div>}
-        {!loading && items.length === 0 && (
-          <div className="text-sm text-slate-500">No employees yet. Add your first employee.</div>
-        )}
-
-        {!loading && items.length > 0 && (
+        {items.length === 0 ? (
+          <div className="text-sm text-slate-500">No employees found.</div>
+        ) : (
           <div className="overflow-auto">
             <table className="w-full text-sm">
               <thead className="text-left text-slate-500">
@@ -108,10 +105,7 @@ export default function Employees() {
                     <td>{e.email}</td>
                     <td>{e.department}</td>
                     <td className="text-right">
-                      <button
-                        className="text-red-600 hover:underline"
-                        onClick={() => deleteEmployee(e.id)}
-                      >
+                      <button className="text-red-600 hover:underline" onClick={() => deleteEmployee(e.id)}>
                         Delete
                       </button>
                     </td>
