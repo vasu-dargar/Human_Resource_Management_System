@@ -20,10 +20,11 @@ from django.urls import path
 from employees.views import EmployeeListCreateView, EmployeeDeleteView
 from employees.summary_view import EmployeeSummaryView
 from attendance.views import AttendanceCreateView, AttendanceListView
+from hrms_backend.health import health
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-
+    path("health/", health),
     path("api/employees/", EmployeeListCreateView.as_view()),
     path("api/employees/<int:pk>/", EmployeeDeleteView.as_view()),
     path("api/employees/<int:pk>/summary/", EmployeeSummaryView.as_view()),
