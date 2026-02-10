@@ -3,3 +3,4 @@ assgnmt_venv/
 
 # Environment variables
 .env
+./hrms-frontend/.env
