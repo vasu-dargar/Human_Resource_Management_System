@@ -1,0 +1,5 @@
+# Virtual environment
+assgnmt_venv/
+
+# Environment variables
+.env
