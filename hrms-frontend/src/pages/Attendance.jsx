@@ -30,7 +30,6 @@ export default function Attendance() {
         ]);
         setEmployees(empRes.data || []);
         setRecords(attRes.data || []);
-        if (!employeeId && empRes.data?.[0]) setEmployeeId(empRes.data[0].employee_id);
       } catch (e) {
         setErr(normalizeError(e));
         setEmployees([]);
@@ -113,6 +112,9 @@ export default function Attendance() {
               onChange={(e) => setEmployeeId(e.target.value)}
               required
             >
+              <option value="" disabled>
++               Select employee
++             </option>
               {employees.map((e) => (
                 <option key={e.id} value={e.employee_id}>
                   {e.employee_id} — {e.full_name}
@@ -156,7 +158,7 @@ export default function Attendance() {
           </div>
 
           <button
-            disabled={saving || employees.length === 0}
+            disabled={saving || employees.length === 0 || !employeeId}
             className="mt-2 rounded-lg bg-slate-900 text-white px-3 py-2 text-sm disabled:opacity-60 disabled:cursor-not-allowed"
           >
             Submit Attendance
