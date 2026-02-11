@@ -36,7 +36,6 @@ System -
 Live Links -
 
         Frontend: https://human-resource-managment-system.netlify.app/
-        Backend API: https://human-resource-management-system-dz1s.onrender.com
         Health Check: https://human-resource-management-system-dz1s.onrender.com/health/
 
 Setup (Local) -
