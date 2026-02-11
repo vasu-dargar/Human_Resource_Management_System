@@ -80,16 +80,24 @@ export default function Attendance() {
     }
   }
 
-  const presentCounts = useMemo(() => {
-    const map = new Map();
-    for (const r of records) {
-      if (r.status === "PRESENT") {
-        const k = r.employee?.employee_id;
-        map.set(k, (map.get(k) || 0) + 1);
-      }
+  const { presentCounts, absentCounts } = useMemo(() => {
+  const present = new Map();
+  const absent = new Map();
+
+  for (const r of records) {
+    const k = r.employee?.employee_id;
+    if (!k) continue;
+
+    if (r.status === "PRESENT") {
+      present.set(k, (present.get(k) || 0) + 1);
+    } else if (r.status === "ABSENT") {
+      absent.set(k, (absent.get(k) || 0) + 1);
     }
-    return map;
+  }
+
+  return { presentCounts: present, absentCounts: absent };
   }, [records]);
+
 
   const isToday = date === today;
 
@@ -180,7 +188,8 @@ export default function Attendance() {
                   <th className="py-2">Date</th>
                   <th>Employee</th>
                   <th>Status</th>
-                  <th className="text-right">Total Presents</th>
+                  <th className="text-right">Total Present</th>
+                  <th className="text-right">Total Absent</th>
                 </tr>
               </thead>
               <tbody>
@@ -192,6 +201,7 @@ export default function Attendance() {
                     </td>
                     <td>{r.status === "PRESENT" ? "Present" : "Absent"}</td>
                     <td className="text-right">{presentCounts.get(r.employee?.employee_id) || 0}</td>
+                    <td className="text-right">{absentCounts.get(r.employee?.employee_id) || 0}</td>
                   </tr>
                 ))}
               </tbody>
