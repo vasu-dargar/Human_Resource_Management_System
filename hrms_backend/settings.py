@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-o616q4wsodvmctrjz@s&+@^jrn*c4s&qnfoomgvg1h0nnxkc%*
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "human-resource-management-system-dz1s.onrender.com",
+    "https://human-resource-management-system-dz1s.onrender.com",
     "localhost",
     "127.0.0.1",
 ]
@@ -60,7 +60,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    os.getenv("FRONTEND_ORIGIN", "http://localhost:5173"),
+    os.getenv("FRONTEND_ORIGIN", "https://human-resource-managment-system.netlify.app"),
 ]
 
 ROOT_URLCONF = "hrms_backend.urls"
