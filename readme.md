@@ -14,7 +14,7 @@ Features -
             - Mark attendance as Present (today only) or Absent (any past/today date)
             - Prevents future date selection
             - View attendance records per employee
-            - Automatically calculates total present days per employee
+            - Cumulatively calculates total present and absent days per employee
 
 Tech Stack -
 
