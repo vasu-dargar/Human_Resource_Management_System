@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-o616q4wsodvmctrjz@s&+@^jrn*c4s&qnfoomgvg1h0nnxkc%*
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "https://human-resource-management-system-dz1s.onrender.com",
+    "human-resource-management-system-dz1s.onrender.com",
     "localhost",
     "127.0.0.1",
 ]
