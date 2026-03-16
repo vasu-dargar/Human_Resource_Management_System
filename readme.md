@@ -25,8 +25,11 @@ Tech Stack -
         
         Backend -
         - Python (Django + Django REST Framework)
-        - MySQL database (Hosted on Aiven)
         - Deployed on Render
+
+        Database -
+        - MySQL
+        - Hosted on Aiven
 
 System -
 
