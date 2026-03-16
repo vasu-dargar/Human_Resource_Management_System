@@ -19,12 +19,12 @@ Features -
 Tech Stack -
 
         Frontend -
-        - JavaScript (React)
+        - React
         - Tailwind CSS
         - Deployed on Netlify
         
         Backend -
-        - Python (Django + Django REST Framework)
+        - Django
         - Deployed on Render
 
         Database -
